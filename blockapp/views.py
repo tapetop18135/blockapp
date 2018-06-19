@@ -28,15 +28,26 @@ def creteBlock(request):
             obj.content = form.cleaned_data['content']
             obj.authId = 1
             obj.save()
-            return HttpResponseRedirect(reverse('blockapp:oneblock',args=(obj.id,)))
+            return HttpResponseRedirect(reverse('blockapp:oneblock', args=(obj.id,)))
         return Http404("Error")
     else:        
         return Http404("Error")
     
+def updateBlockForm(request, blockid):
+    oneBlock = get_object_or_404(Blocktable, id=blockid)
+    print(oneBlock)
+    return render(request,'updateBlockForm.html',{"blockone" : oneBlock})
+
 
 def updateBlock(request, blockid):
-    return HttpResponse("updateBlock %s" % blockid)
+    if request.method == "POST":
+        obj = Blocktable.objects.get(id=blockid)
+        print(blockid)
+        obj.title = request.POST.get("title")
+        obj.content = request.POST.get("content")
+        obj.save()
 
+    return HttpResponseRedirect(reverse('blockapp:oneblock', args=(blockid,)))
 
 def delete(request, blockid):
     block = get_object_or_404(Blocktable, id=blockid)
