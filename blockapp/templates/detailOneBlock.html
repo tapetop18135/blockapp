@@ -1,0 +1,15 @@
+{% extends "base_layout.html" %}
+
+{% block title %}title : {{blockone.title}}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="title">Title : {{blockone.title}}</div>
+        <div class="content"><p>{{blockone.content}}</p></div>
+        <div class="date">{{blockone.date}}</div>
+    </div>
+    <br>
+    <button><a href="/blockapp">BACK</a></button>
+    <button><a href="{% url 'blockapp:updateblock' blockone.id %}">EDIT</a></button>
+    <button><a href="{% url 'blockapp:deleteblock' blockone.id %}">DELETE</a></button>
+{% endblock %}

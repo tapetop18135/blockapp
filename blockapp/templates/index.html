@@ -1,0 +1,16 @@
+{% extends "base_layout.html" %}
+
+{% block title %}ListBlock{% endblock %}
+
+{% block content %}
+    {% for block in listblock %}
+        <div class="row">
+            <div class="block">
+                <div class="title">{{forloop.counter}}. <a href="{% url 'blockapp:oneblock' block.id %}">{{block.title}}</a></div>
+                <div class="date">{{block.date}}</div>
+            </div>
+        </div>
+        <br />
+    {% endfor %}
+    <button><a href="{% url 'blockapp:createblockform' %}">ADD BLOCK</a></button>
+{% endblock %}
